@@ -12,7 +12,9 @@ export class LoggingInterceptor implements NestInterceptor {
     console.log('Before...');
     const request = context.switchToHttp().getRequest<Request>();
     console.log('request: ');
-    console.log(JSON.stringify(request));
+    request.json().then((json) => {
+      console.log(JSON.stringify(json));
+    });
     const now = Date.now();
     return next
       .handle()
